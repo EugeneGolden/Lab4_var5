@@ -38,7 +38,6 @@ namespace Rextester
                     Console.Write(initialArray[i, j] + " ");
                 }
             }
-            Console.ReadKey();
 
             Console.WriteLine();
             Console.WriteLine();
@@ -71,7 +70,7 @@ namespace Rextester
             {
                 for (int j = i+1; j < dictValuesAmount.Count; j++)
                 {
-                    if ((dictValuesAmount.ElementAt(i).Key == Math.Abs(dictValuesAmount.ElementAt(j).Key)) & (!processedElements.Contains(dictValuesAmount.ElementAt(j).Key)))
+                    if ((dictValuesAmount.ElementAt(i).Key == -dictValuesAmount.ElementAt(j).Key) & (!processedElements.Contains(dictValuesAmount.ElementAt(j).Key)))
                     {
                         if (dictValuesAmount.ElementAt(i).Value <= dictValuesAmount.ElementAt(j).Value)
                         {
