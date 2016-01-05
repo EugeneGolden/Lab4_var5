@@ -70,7 +70,7 @@ namespace Rextester
             {
                 for (int j = i+1; j < dictValuesAmount.Count; j++)
                 {
-                    if ((dictValuesAmount.ElementAt(i).Key == -dictValuesAmount.ElementAt(j).Key) & (!processedElements.Contains(dictValuesAmount.ElementAt(j).Key)))
+                    if ((dictValuesAmount.ElementAt(i).Key == -dictValuesAmount.ElementAt(j).Key) & (!processedElements.Contains(dictValuesAmount.ElementAt(i).Key) & !processedElements.Contains(dictValuesAmount.ElementAt(j).Key)))
                     {
                         if (dictValuesAmount.ElementAt(i).Value <= dictValuesAmount.ElementAt(j).Value)
                         {
@@ -147,7 +147,7 @@ namespace Rextester
                     }
                 }
             }
-            Console.ReadKey();
+
 
             //Выведем результат
             for (int i = 0; i < lines; i++)
