@@ -17,14 +17,14 @@ namespace Rextester
         public static void Main(string[] args)
         {
             //Зададим количество строк и столбцов в массиве
-            const int rows = 4;
+            const int rows = 5;
             const int lines = 4;
 
             //Будем помещать уже обработанные числа
             HashSet<float> processedElements = new HashSet<float>();
 
             //Исходный двумерный массив
-            float[,] initialArray = new float[lines, rows] { { -3, 3, 2, 1 }, { 3, 7, -7, -1 }, { 4, -3, 8, 9 }, { 1, -8, 0, 6 } };
+            float[,] initialArray = new float[lines, rows] { { -3, 3, 2, 1, 1 }, { 3, 7, -7, -1, 1 }, { 4, -3, 8, 9, 1 }, { 1, -8, 0, 6, 1 } };
 
             //Словарь для подсчета количества одинаковых чисел в массиве
             Dictionary<float, int> dictValuesAmount = new Dictionary<float, int>();
@@ -111,24 +111,29 @@ namespace Rextester
                             Console.WriteLine(numberOfChanges + " for the second branch");
                             processedElements.Add(dictValuesAmount.ElementAt(i).Key);
                             processedElements.Add(dictValuesAmount.ElementAt(j).Key);
-                            int k = 0;
+                            int p = 0;
+                            int q = 0;
                             for (int l = 0; l < lines; l++)
                             {
                                 for (int m = 0; m < rows; m++)
                                 {
-                                    if (k > (numberOfChanges - 1))
-                                    {
-                                        break;
-                                    }
                                     if (initialArray[l, m] == dictValuesAmount.ElementAt(i).Key)
                                     {
+                                        if (p == (numberOfChanges / 2 ))
+                                        {
+                                            continue;
+                                        }
                                         initialArray[l, m] = -dictValuesAmount.ElementAt(i).Key;
-                                        k++;
+                                        p++;
                                     }
                                     else if (initialArray[l, m] == -dictValuesAmount.ElementAt(i).Key)
                                     {
+                                        if (q == (numberOfChanges / 2))
+                                        {
+                                            continue;
+                                        }
                                         initialArray[l, m] = dictValuesAmount.ElementAt(i).Key;
-                                        k++;
+                                        q++;
                                     }
                                 }
                             }
