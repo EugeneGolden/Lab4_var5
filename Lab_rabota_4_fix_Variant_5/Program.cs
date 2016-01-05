@@ -70,11 +70,13 @@ namespace Rextester
             {
                 for (int j = i+1; j < dictValuesAmount.Count; j++)
                 {
-                    if ((dictValuesAmount.ElementAt(i).Key == -dictValuesAmount.ElementAt(j).Key) & (!processedElements.Contains(dictValuesAmount.ElementAt(i).Key) & !processedElements.Contains(dictValuesAmount.ElementAt(j).Key)))
+                    //Проверяем есть ли вообще в словаре разные по знаку ключи и содержатся ли они в хеш сете
+                    if ((dictValuesAmount.ElementAt(i).Key == -dictValuesAmount.ElementAt(j).Key) & !processedElements.Contains(dictValuesAmount.ElementAt(i).Key) & !processedElements.Contains(dictValuesAmount.ElementAt(j).Key))
                     {
+                        Console.WriteLine(dictValuesAmount.ContainsKey(-dictValuesAmount.ElementAt(i).Key) + " " + -dictValuesAmount.ElementAt(i).Key);
                         if (dictValuesAmount.ElementAt(i).Value <= dictValuesAmount.ElementAt(j).Value)
                         {
-                            int numberOfChanges = dictValuesAmount.ElementAt(i).Value;
+                            int numberOfChanges = dictValuesAmount.ElementAt(i).Value*2;
                             processedElements.Add(dictValuesAmount.ElementAt(j).Key);
                             int k = 0;
                             for (int l = 0; l < lines; l++)
