@@ -76,8 +76,12 @@ namespace Rextester
                         Console.WriteLine(dictValuesAmount.ContainsKey(-dictValuesAmount.ElementAt(i).Key) + " " + -dictValuesAmount.ElementAt(i).Key);
                         if (dictValuesAmount.ElementAt(i).Value <= dictValuesAmount.ElementAt(j).Value)
                         {
+                            //Выясняем сколько раз необходимо сделать замену (не забываем, что 1 замена = 2 операции - заменить положительное число на отрицательное,
+                            // и отрицательное на положительное)
                             int numberOfChanges = dictValuesAmount.ElementAt(i).Value*2;
+                            //Добавляем обработанные элементы в хеш сеты, дабы больше не обрабатывать те же элементы
                             processedElements.Add(dictValuesAmount.ElementAt(j).Key);
+
                             int k = 0;
                             for (int l = 0; l < lines; l++)
                             {
@@ -87,7 +91,7 @@ namespace Rextester
                                     {
                                         initialArray[l, m] = -dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k >= (numberOfChanges - 1))
+                                        if (k > (numberOfChanges - 1))
                                         {
                                             break;
                                         }
@@ -96,7 +100,7 @@ namespace Rextester
                                     {
                                         initialArray[l, m] = dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k >= (numberOfChanges - 1))
+                                        if (k > (numberOfChanges - 1))
                                         {
                                             break;
                                         }
@@ -121,7 +125,7 @@ namespace Rextester
                                     {
                                         initialArray[l, m] = -dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k >= (numberOfChanges - 1))
+                                        if (k > (numberOfChanges - 1))
                                         {
                                             break;
                                         }
@@ -130,7 +134,7 @@ namespace Rextester
                                     {
                                         initialArray[l, m] = dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k >= (numberOfChanges - 1))
+                                        if (k > (numberOfChanges - 1))
                                         {
                                             break;
                                         }
