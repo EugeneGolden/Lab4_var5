@@ -80,6 +80,7 @@ namespace Rextester
                             // и отрицательное на положительное)
                             int numberOfChanges = dictValuesAmount.ElementAt(i).Value*2;
                             //Добавляем обработанные элементы в хеш сеты, дабы больше не обрабатывать те же элементы
+                            processedElements.Add(dictValuesAmount.ElementAt(i).Key);
                             processedElements.Add(dictValuesAmount.ElementAt(j).Key);
 
                             int k = 0;
@@ -87,61 +88,47 @@ namespace Rextester
                             {
                                 for (int m = 0; m < rows; m++)
                                 {
+                                    if (k > (numberOfChanges - 1))
+                                    {
+                                        break;
+                                    }
                                     if (initialArray[l, m] == dictValuesAmount.ElementAt(i).Key)
                                     {
                                         initialArray[l, m] = -dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k > (numberOfChanges - 1))
-                                        {
-                                            break;
-                                        }
                                     }
                                     else if (initialArray[l, m] == -dictValuesAmount.ElementAt(i).Key)
                                     {
                                         initialArray[l, m] = dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k > (numberOfChanges - 1))
-                                        {
-                                            break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        continue;
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            int numberOfChanges = dictValuesAmount.ElementAt(j).Value;
+                            int numberOfChanges = dictValuesAmount.ElementAt(j).Value*2;
+                            Console.WriteLine(numberOfChanges + " for the second branch");
+                            processedElements.Add(dictValuesAmount.ElementAt(i).Key);
                             processedElements.Add(dictValuesAmount.ElementAt(j).Key);
                             int k = 0;
                             for (int l = 0; l < lines; l++)
                             {
                                 for (int m = 0; m < rows; m++)
                                 {
+                                    if (k > (numberOfChanges - 1))
+                                    {
+                                        break;
+                                    }
                                     if (initialArray[l, m] == dictValuesAmount.ElementAt(i).Key)
                                     {
                                         initialArray[l, m] = -dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k > (numberOfChanges - 1))
-                                        {
-                                            break;
-                                        }
                                     }
                                     else if (initialArray[l, m] == -dictValuesAmount.ElementAt(i).Key)
                                     {
                                         initialArray[l, m] = dictValuesAmount.ElementAt(i).Key;
                                         k++;
-                                        if (k > (numberOfChanges - 1))
-                                        {
-                                            break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        continue;
                                     }
                                 }
                             }
