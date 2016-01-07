@@ -1,14 +1,10 @@
-﻿//Title of this code
-//Rextester.Program.Main is the entry point for your code. Don't change it.
-//Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 
-namespace Rextester
+namespace Lab_rabota_fix_Variant_5
 {
     public class Program
     {
@@ -24,12 +20,13 @@ namespace Rextester
             HashSet<float> processedElements = new HashSet<float>();
 
             //Исходный двумерный массив
-            float[,] initialArray = new float[lines, rows] { { -3, 3, 2, 1, 1 }, { 3, 7, -7, -1, 1 }, { 4, -3, 8, 9, 1 }, { 1, -8, 0, 6, 1 } };
+            float[,] initialArray = new float[lines, rows] { { -3, 3, 2, 1, 1 }, { 3, -7, 7, -1, 1 }, { 4, -3, 7, 9, 8 }, { 1, -8, 0, 6, 1 } };
 
             //Словарь для подсчета количества одинаковых чисел в массиве
             Dictionary<float, int> dictValuesAmount = new Dictionary<float, int>();
-            
+
             //Выведем массив для просмотра
+            Console.WriteLine("Исходный массив:");
             for (int i = 0; i < lines; i++)
             {
                 Console.WriteLine();
@@ -58,13 +55,7 @@ namespace Rextester
                 }
             }
 
-            //Выведем словарь для просмотра
-            foreach (KeyValuePair<float, int> kvp in dictValuesAmount)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-
-            //Теперь берем проделываем поиск противоположных по знаку ключей, выявляем наименьшее значение для них (выявляем сколько раз мы должны осуществить замену чисел в массиве),
+            //Теперь проделываем поиск противоположных по знаку ключей, выявляем наименьшее значение для них (выявляем сколько раз мы должны осуществить замену чисел в массиве),
             //и проделываем замену
             for (int i = 0; i < (dictValuesAmount.Count - 1); i++)
             {
@@ -73,7 +64,7 @@ namespace Rextester
                     //Проверяем есть ли вообще в словаре разные по знаку ключи и содержатся ли они в хеш сете
                     if ((dictValuesAmount.ElementAt(i).Key == -dictValuesAmount.ElementAt(j).Key) & !processedElements.Contains(dictValuesAmount.ElementAt(i).Key) & !processedElements.Contains(dictValuesAmount.ElementAt(j).Key))
                     {
-                        Console.WriteLine(dictValuesAmount.ContainsKey(-dictValuesAmount.ElementAt(i).Key) + " " + -dictValuesAmount.ElementAt(i).Key);
+                        //Console.WriteLine(dictValuesAmount.ContainsKey(-dictValuesAmount.ElementAt(i).Key) + " " + -dictValuesAmount.ElementAt(i).Key);
                         if (dictValuesAmount.ElementAt(i).Value <= dictValuesAmount.ElementAt(j).Value)
                         {
                             //Выясняем сколько раз необходимо сделать замену (не забываем, что 1 замена = 2 операции - заменить положительное число на отрицательное,
@@ -108,11 +99,10 @@ namespace Rextester
                         else
                         {
                             int numberOfChanges = dictValuesAmount.ElementAt(j).Value*2;
-                            Console.WriteLine(numberOfChanges + " for the second branch");
                             processedElements.Add(dictValuesAmount.ElementAt(i).Key);
                             processedElements.Add(dictValuesAmount.ElementAt(j).Key);
-                            int p = 0;
-                            int q = 0;
+                            int p = 0; //для чисел одного знака
+                            int q = 0; //для чисел противоположного знака
                             for (int l = 0; l < lines; l++)
                             {
                                 for (int m = 0; m < rows; m++)
@@ -148,6 +138,7 @@ namespace Rextester
 
 
             //Выведем результат
+            Console.WriteLine("Результирующий массив:");
             for (int i = 0; i < lines; i++)
             {
                 Console.WriteLine();
